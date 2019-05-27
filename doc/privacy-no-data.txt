@@ -1,0 +1,1 @@
+This test application doesn't store any user data.
