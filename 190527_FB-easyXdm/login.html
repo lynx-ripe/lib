@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+    <script type="text/javascript">
+
+        window.fbAsyncInit = function () {
+            FB.init({"appId":"2606487762717089","version":"v3.3"});
+            $(function () { $(document).trigger('fbInit'); });
+        };
+
+        (function (d) {
+            var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+            if (d.getElementById(id)) {return}
+
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = '//connect.facebook.net/en_US/sdk/debug.js';
+
+            ref.parentNode.insertBefore(js, ref);
+        }(document));
+
+        $(document).on('fbInit', function() {
+            $('#fb-login-button').closest('.facebook-login-wrapper').on('click', function (e) {
+                FB.login(
+                    function (response) {
+                        alert('Worked, status: '+response.status+' userID: '+response.authResponse.userID);
+                    },
+                    {"scope":"email"}            );
+            });
+        });
+
+
+    </script>
+
+
+    <style type="text/css" media="screen">
+        body {
+            background: #dddddd;
+            padding: 20px;
+            font-family: Helvetica;
+        }
+
+        button {
+            background: #6060b0;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 14px;
+            font-size: 15px;
+            color: #fff;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+<div class="facebook-login-wrapper">
+    <div class="facebook-login-button">
+        <button name="social&#x5B;facebook-login&#x5D;" id="fb-login-button" value=""><span>FB Login</span></button>
+    </div>
+</div>
+
+<div id="fb-root"></div>
+
+</body>
+</html>

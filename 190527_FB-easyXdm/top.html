@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            var id = 'facebook-iframe';
+            var ie = document.getElementById(id);
+
+            var loc = new URL(location);
+            var protoHost = loc.protocol + '//' + loc.hostname;
+            ie.src = 'proxy.html?urn=login.html&xdm_c=default9052&xdm_p=1&xdm_e=' +
+                encodeURIComponent(protoHost) + '&timestamp=' + (new Date()).getTime();
+        });
+    </script>
+</head>
+<body>
+<iframe style="width: 800px; height: 600px" id="facebook-iframe"></iframe>
+</body>
+</html>
