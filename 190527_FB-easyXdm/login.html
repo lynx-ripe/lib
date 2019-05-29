@@ -7,33 +7,25 @@
 
     <script type="text/javascript">
 
-        window.fbAsyncInit = function () {
-            FB.init({"appId":"2606487762717089","version":"v3.3"});
-            $(function () { $(document).trigger('fbInit'); });
-        };
+        $(function () {
+            $('.facebook-login-button').on('click', function () {
 
-        (function (d) {
-            var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-            if (d.getElementById(id)) {return}
-
-            js = d.createElement('script');
-            js.id = id;
-            js.async = true;
-            js.src = '//connect.facebook.net/en_US/sdk/debug.js';
-
-            ref.parentNode.insertBefore(js, ref);
-        }(document));
-
-        $(document).on('fbInit', function() {
-            $('#fb-login-button').closest('.facebook-login-wrapper').on('click', function (e) {
-                FB.login(
-                    function (response) {
-                        alert('Worked, status: '+response.status+' userID: '+response.authResponse.userID);
-                    },
-                    {"scope":"email"}            );
+                var loc = new URL(location);
+                var redirectUrl = loc.protocol + '//' + loc.hostname + loc.pathname.replace('login.html', 'return.html');
+                var url = 'https://www.facebook.com/v3.3/dialog/oauth?client_id=2606487762717089&redirect_uri='
+                    + encodeURIComponent(redirectUrl) + '&state=state-param&response_type=token';
+                var handle = window.open(url);
+                var checker = function () {
+                    if (!handle.closed) {
+                        setTimeout(checker, 100);
+                        return;
+                    }
+                    var access_token = document.getElementById('access_token').value;
+                    alert('Access token:'+access_token);
+                };
+                checker();
             });
         });
-
 
     </script>
 
@@ -66,7 +58,7 @@
     </div>
 </div>
 
-<div id="fb-root"></div>
+<input id="access_token" type="hidden">
 
 </body>
 </html>

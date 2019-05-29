@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript">
+        var hash = window.location.hash;
+        var parts = hash.slice(1).split('&');
+        var params = {};
+        for (var i in parts) {
+            var kv = parts[i].split('=', 2);
+            params[kv[0]] = kv[1];
+        }
+        if (params.hasOwnProperty('access_token')) {
+            window.opener.document.getElementById('access_token').value = params['access_token'];
+        }
+        window.close();
+    </script>
+</head>
+<body>
+</body>
+</html>

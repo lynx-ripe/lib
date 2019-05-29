@@ -11,8 +11,9 @@
             var ie = document.getElementById(id);
 
             var loc = new URL(location);
+            var urn = loc.pathname.replace('top.html', 'login.html');
             var protoHost = loc.protocol + '//' + loc.hostname;
-            ie.src = 'proxy.html?urn=login.html&xdm_c=default9052&xdm_p=1&xdm_e=' +
+            ie.src = 'proxy.html?urn=' + encodeURIComponent(urn) + '&xdm_c=default9052&xdm_p=1&xdm_e=' +
                 encodeURIComponent(protoHost) + '&timestamp=' + (new Date()).getTime();
         });
     </script>
